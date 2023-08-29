@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: text2image-api-deployment
+  name: text2image-api-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: text2image-api-deployment
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: text2image-api-deployment
+    spec:
+      containers:
+        - image: yahiadev/text2imageapi
+          name: text2image-api-deployment
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8081
+          resources: {}
+status: {}

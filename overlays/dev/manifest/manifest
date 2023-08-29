@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: text2image-api-deployment
+  name: text2image-api-service
+spec:
+  ports:
+  - port: 8081
+    protocol: TCP
+    targetPort: 8081
+  selector:
+    app: text2image-api-deployment
+  type: NodePort
+status:
+  loadBalancer: {}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: text2image-api-deployment
+  name: text2image-api-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: text2image-api-deployment
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: text2image-api-deployment
+    spec:
+      containers:
+      - env:
+        - name: SPRING_PROFILES_ACTIVE
+          value: dev
+        image: yahiadev/text2imageapi:0.0.2-SNAPSHOT
+        imagePullPolicy: Always
+        name: text2image-api-deployment
+        ports:
+        - containerPort: 8081
+        resources: {}
+status: {}
