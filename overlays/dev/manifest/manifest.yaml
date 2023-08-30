@@ -56,5 +56,10 @@ spec:
   rules:
   - http:
       paths:
-      - path: /imageGenerator/?(.*)
+      - backend:
+          service:
+            name: text2image-api-service
+            port:
+              number: 8081
+        path: /imageGenerator/?(.*)
         pathType: Prefix
