@@ -5,4 +5,4 @@ metadata:
     app: text2image-api-deployment
   name: text2image-api-service
 spec:
-  type: LoadBalancer
+  type: ClusterIP

@@ -5,3 +5,4 @@ resources:
 patches:
 - path: text2image-api-deployment.yaml
 - path: text2image-api-service.yaml
+- path: ingress.yaml

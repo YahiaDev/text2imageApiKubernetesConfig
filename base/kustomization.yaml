@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
   - text2image-api-deployment.yaml
   - text2image-api-service.yaml
+  - ingress.yaml
 
 
 images:
