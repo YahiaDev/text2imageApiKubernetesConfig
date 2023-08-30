@@ -3,4 +3,4 @@ text2imageWebKubernetesConfig:
 
 
 for ingress:
-kubectl port-forward -n ingress-nginx svc/ingress-nginx-controller 8088:80
+kubectl -n ingress-nginx port-forward svc/ingress-nginx-controller 8088:80
