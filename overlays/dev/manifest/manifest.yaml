@@ -11,7 +11,7 @@ spec:
     targetPort: 8081
   selector:
     app: text2image-api-deployment
-  type: NodePort
+  type: ClusterIP
 status:
   loadBalancer: {}
 ---
@@ -36,10 +36,25 @@ spec:
       - env:
         - name: SPRING_PROFILES_ACTIVE
           value: dev
-        image: yahiadev/text2imageapi:0.0.3-SNAPSHOT
+        image: yahiadev/text2imageapi:0.0.4-SNAPSHOT
         imagePullPolicy: Always
         name: text2image-api-deployment
         ports:
         - containerPort: 8081
         resources: {}
 status: {}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+    nginx.ingress.kubernetes.io/use-regex: "true"
+  name: text2image-app-ingress
+spec:
+  ingressClassName: nginx
+  rules:
+  - http:
+      paths:
+      - path: /imageGenerator/?(.*)
+        pathType: Prefix
